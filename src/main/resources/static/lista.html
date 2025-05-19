@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Contatos</title>
+</head>
+<body>
+    <h2>Contatos</h2>
+    <ul id="listaContatos"></ul>
+
+    <a href="index.html">Voltar</a>
+
+    <script>
+        //Busca os contatos no backend servidor
+        fetch("/api/contatos")
+          .then(function(resposta) {
+            return resposta.json();
+          })
+        
+          .then(function(lista) {
+            let ul = document.getElementById("listaContatos")
+
+            //Para cada contato, criar um  <li> e adicionar na lista
+            lista.forEach(function(contato) {
+                let li = document.createElement("li")
+                li.textContent = contato.nome + " - " + contato.email
+                ul.appendChild(li)
+            })
+          })
+    </script>
+</body>
+</html>
